@@ -51,7 +51,7 @@ def create_run(message_content: str, file_ids: Optional[List[str]] = None, threa
     """ Create a thread in the assistant. """
     # If there is no thread ID, create a new thread and run
     if thread_id is None:
-        logger.info("Creating new thread")
+        logger.info(f"Creating new thread with message {message_content} and file IDs {file_ids}")
         run = openai_client.beta.threads.create_and_run(
             assistant_id=assistant_id,
             thread={
@@ -79,3 +79,11 @@ def create_run(message_content: str, file_ids: Optional[List[str]] = None, threa
         )
 
         return {"run_id": run.id, "thread_id": run.thread_id}
+
+def list_files(assistant_id: str = assistant_id) -> List[str]:
+    """ List the files associated with an assistant. """
+    assistant_files = openai_client.beta.assistants.files.list(
+        assistant_id=assistant_id
+    )
+
+    return assistant_files
