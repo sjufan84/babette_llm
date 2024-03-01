@@ -23,3 +23,7 @@ def get_openai_client():
 def get_anthropic_client():
     """ Get the Anthropic client. """
     return Anthropic(os.getenv("ANTHROPIC_KEY"))
+
+def get_assistant_id():
+    """ Get the assistant ID. """
+    return os.getenv("ASSISTANT_ID")
