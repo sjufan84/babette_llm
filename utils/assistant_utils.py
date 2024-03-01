@@ -90,7 +90,7 @@ async def poll_run_status(run_id: str, thread_id: str):
                 logging.error(f"Error submitting tool outputs: {e}")
                 return None
         else:
-            await asyncio.sleep(1.5)  # Non-blocking sleep
+            await asyncio.sleep(2.5)  # Non-blocking sleep
             run_status = await retrieve_run_status(thread_id, run_id)
             if run_status is None:
                 return None

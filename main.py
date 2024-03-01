@@ -19,7 +19,7 @@ if "file_names" not in st.session_state:
 async def main():
     """ Main function for PR Prophet """
     st.markdown("""
-                <h3 style='text-align: center; color: #f6bd60;'>Social Media Master</h3>
+                <h3 style='text-align: center; color: #000000;'>Social Media Master</h3>
                 """, unsafe_allow_html=True)
     st.text("")
     # Create the file uploader in the sidebar
@@ -40,7 +40,7 @@ async def main():
                 st.sidebar.warning(f"File {file.name} already uploaded")
                 # Remove the file from the list of uploaded files
                 uploaded_files.remove(file)
-        upload_file_button = st.sidebar.button("Upload file(s)")
+        upload_file_button = st.sidebar.button("Upload file(s)", use_container_width=True, type="primary")
         if upload_file_button:
             # Check to see if the file name has already been uploaded
             for file in uploaded_files:
@@ -69,7 +69,7 @@ async def main():
         # Display assistant response in chat message container
         with st.chat_message("assistant"):
             message_placeholder = st.empty()
-        with st.spinner("Hang tight, I'm working on your request..."):
+        with st.spinner("Hang tight, I'm working on it... Patience is a virtue."):
             # Generate the full response from the chat model
             response = create_run(
                 message_content=prompt,
