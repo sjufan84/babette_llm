@@ -18,13 +18,14 @@ class Message(BaseModel):
     content: str = Field(..., description="The content of the message.")
     file_ids: List[str] = Field([], description="The file IDs of the message.")
 
-def upload_openai_file(file: bytes) -> str:
-    """ Upload a file to OpenAI. 
+async def upload_openai_file(file: bytes) -> str:
+    """ Upload a file to OpenAI.
     Expects a base64 encoded file. """
-    file = openai_client.create(
-        file = open(file, "rb"),
+    file = openai_client.files.create(
+        file = file,
         purpose = "assistants"
     )
+    logger.info(f"File {file.id} uploaded")
     return file.id
 
 def create_message(content: str, file_ids: List[str] = None) -> Message:
@@ -51,7 +52,7 @@ def create_run(message_content: str, file_ids: Optional[List[str]] = None, threa
     # If there is no thread ID, create a new thread and run
     if thread_id is None:
         logger.info("Creating new thread")
-        run = openai_client.beta.threads.runs.create_and_run(
+        run = openai_client.beta.threads.create_and_run(
             assistant_id=assistant_id,
             thread={
                 "messages" : [
