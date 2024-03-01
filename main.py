@@ -29,7 +29,12 @@ async def main():
         you upload within a session should be tracked, so you can reference them in the chat without
         having to reload them.  If for some reason this does not seem to be the case, let me know.  A list of
         supported file types can be found
-        <a href="https://platform.openai.com/docs/assistants/tools/supported-files">here</a>.</p>""",
+        <a href="https://platform.openai.com/docs/assistants/tools/supported-files">here</a>.
+        Just upload whatever files
+        and then once they are uploaded you can go ahead and start chatting about them.  Just know that
+        when you are asking questions about the doc(s) you upload it is a little slow,
+        but pretty impressive.  I don't think you should bump up against any limits as far as how much
+        info it can answer questions about... it's something like 128,000 tokens which is an absurd amount.</p>""",
         unsafe_allow_html=True)
     uploaded_files = st.sidebar.file_uploader("Upload a file", accept_multiple_files=True)
     if uploaded_files is not None:
